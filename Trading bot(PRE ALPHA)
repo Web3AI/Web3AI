@@ -1,0 +1,63 @@
+pragma solidity ^0.7.0;
+
+contract TradingBot {
+  // Address of the exchange contract
+  address exchangeAddress;
+
+  // The symbol of the token that we want to trade
+  string public tokenSymbol;
+
+  // The current price of the token
+  uint256 public currentPrice;
+
+  // The target price at which we want to sell the token
+  uint256 public targetPrice;
+
+  // The amount of the token that we currently own
+  uint256 public tokenBalance;
+
+  // The minimum amount of the token that we want to sell
+  uint256 public minSellAmount;
+
+  // Constructor function that sets the exchange address and the token symbol
+  constructor(address _exchangeAddress, string memory _tokenSymbol) public {
+    exchangeAddress = _exchangeAddress;
+    tokenSymbol = _tokenSymbol;
+  }
+
+  // Function to update the current price of the token
+  function updatePrice(uint256 _currentPrice) public {
+    currentPrice = _currentPrice;
+  }
+
+  // Function to set the target price at which we want to sell the token
+  function setTargetPrice(uint256 _targetPrice) public {
+    targetPrice = _targetPrice;
+  }
+
+  // Function to set the minimum amount of the token that we want to sell
+  function setMinSellAmount(uint256 _minSellAmount) public {
+    minSellAmount = _minSellAmount;
+  }
+
+  // Function to check if the current price has reached the target price
+  function checkPrice() public view returns (bool) {
+    if (currentPrice >= targetPrice) {
+      return true;
+    }
+    return false;
+  }
+
+  // Function to sell the token on the exchange
+  function sell() public {
+    // Check if we have enough of the token to sell
+    require(tokenBalance >= minSellAmount, "Not enough tokens to sell");
+
+    // Call the sell function on the exchange contract
+    (bool success, ) = exchangeAddress.call(abi.encodeWithSignature("sell(string,uint256,uint256)", tokenSymbol, tokenBalance, currentPrice));
+    require(success, "Sell failed");
+
+    // Reset the token balance
+    tokenBalance = 0;
+  }
+}
