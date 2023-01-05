@@ -21,3 +21,5 @@ AI-powered customer support: Our system will use natural language processing to 
 Conclusion:
 
 The traditional crypto space has been limited by its reliance on manual processes and human expertise. However, with the advent of artificial intelligence, it is now possible to revolutionize the way that we approach cryptocurrency. Our AI-powered crypto project aims to make the crypto space more accessible, efficient, and user-friendly, and we believe that it has the potential to revolutionize the way that people buy, sell, and manage their digital assets.
+
+Join the Discord to stay updated: https://discord.gg/UWTeYEtRyy
